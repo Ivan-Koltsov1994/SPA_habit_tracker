@@ -8,3 +8,4 @@ asgiref
 drf-yasg
 requests
 pyyaml
+django-cors-headers
