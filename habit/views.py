@@ -3,6 +3,7 @@ from rest_framework import viewsets, generics
 from rest_framework.permissions import IsAuthenticated
 
 from habit.models import Habit
+from habit.permissions import UserPermissionsModerator, UserPermissionsOwner
 from habit.serializers import HabitSerializers
 from users.models import UserRoles
 
@@ -11,7 +12,7 @@ class HabitViewSet(viewsets.ModelViewSet):
     """Вывод списка всех привычек"""
     serializer_class = HabitSerializers
     queryset = Habit.objects.all()
-    permission_classes = [IsAuthenticated]
+    # permission_classes = [UserPermissionsModerator,UserPermissionsOwner]
 
     def get_queryset(self):
         """Фильтруем список привычек только для владельца или модератора"""
@@ -25,7 +26,7 @@ class HabitsListView(generics.ListAPIView):
     """Вывод списка  публичных привычек"""
     serializer_class = HabitSerializers
     queryset = Habit.objects.all()
-    permission_classes = [IsAuthenticated]
+    # permission_classes = [UserPermissionsModerator,UserPermissionsOwner]
 
 
     def get_queryset(self):
