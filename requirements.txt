@@ -11,3 +11,5 @@ pyyaml
 django-cors-headers
 redis
 celery
+evenlet
+telebot
