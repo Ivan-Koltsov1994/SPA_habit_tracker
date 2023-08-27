@@ -9,12 +9,12 @@ from rest_framework_simplejwt.views import TokenObtainPairView
 class UsersListView(generics.ListAPIView):
     serializer_class = ForAuthUserSerializers
     queryset = User.objects.all()
-    permission_classes = [IsAuthenticated]
+    # permission_classes = [IsAuthenticated]
 
 class UsersDetailView(generics.RetrieveAPIView):
     serializer_class = ForAuthUserSerializers
     queryset = User.objects.all()
-    permission_classes = [IsAuthenticated]
+    # permission_classes = [IsAuthenticated]
 
 class UsersCreateView(generics.CreateAPIView):
     serializer_class = ForCreateUserSerializers
@@ -28,7 +28,7 @@ class UsersCreateView(generics.CreateAPIView):
 class UsersUpdateView(generics.UpdateAPIView):
     serializer_class = ForCreateUserSerializers
     queryset = User.objects.all()
-    permission_classes = [IsUserProfile]
+    # permission_classes = [IsUserProfile]
 
     def get_queryset(self):
         user = self.request.user
