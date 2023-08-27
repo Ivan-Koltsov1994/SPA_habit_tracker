@@ -58,6 +58,7 @@ class User(AbstractUser):
     # Установка флага активности пользователя
     is_active = models.BooleanField(default=True, verbose_name='активность')
     chat_id = models.CharField(max_length=15, verbose_name='ID бота TG', **NULLABLE)
+    login_tg = models.CharField(max_length=100, unique=True, verbose_name='логин телеграмм', **NULLABLE)
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []
