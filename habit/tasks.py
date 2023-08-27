@@ -14,7 +14,7 @@ def send_telegram_message():
     bot = TeleBot(settings.TG_BOT_TOKEN)
 
     time_now = datetime.now()
-    start_time = time_now - timedelta(minutes=1)
+    start_time = time_now - timedelta(minutes=10)
     habit_data = Habit.objects.filter(time__gte=start_time)
 
     for habit in habit_data.filter(time__lte=time_now):
