@@ -9,3 +9,5 @@ drf-yasg
 requests
 pyyaml
 django-cors-headers
+redis
+celery
