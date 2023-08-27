@@ -2,7 +2,8 @@ from rest_framework import generics
 from rest_framework.permissions import IsAuthenticated
 
 from users.models import User
-
+from users.serializers import ForAuthUserSerializers, ForCreateUserSerializers
+from rest_framework_simplejwt.views import TokenObtainPairView
 
 class UsersListView(generics.ListAPIView):
     serializer_class = ForAuthUserSerializers
