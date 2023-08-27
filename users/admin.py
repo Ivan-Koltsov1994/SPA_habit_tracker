@@ -5,6 +5,6 @@ from users.models import User
 
 @admin.register(User)
 class UserAdmin(admin.ModelAdmin):
-    list_display = ('id', 'email','place', 'phone', 'is_active',)
+    list_display = ('id', 'email','city', 'phone', 'is_active',)
     list_filter = ('id','is_active',)
 
