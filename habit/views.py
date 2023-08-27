@@ -5,6 +5,7 @@ from rest_framework.permissions import IsAuthenticated
 from habit.models import Habit
 from habit.permissions import UserPermissionsModerator, UserPermissionsOwner
 from habit.serializers import HabitSerializers
+from habit.services import create_habit_schedule
 from users.models import UserRoles
 from habit.tasks import send_telegram_message
 
@@ -26,7 +27,8 @@ class HabitViewSet(viewsets.ModelViewSet):
     def perform_create(self, serializer) -> None:
         """Сохраняет новому объекту владельца и создает задачу"""
         serializer.save(owner=self.request.user)
-        send_telegram_message.delay()
+        habit = serializer.save()
+        create_habit_schedule(habit)
 
 class HabitsListView(generics.ListAPIView):
     """Вывод списка  публичных привычек"""
