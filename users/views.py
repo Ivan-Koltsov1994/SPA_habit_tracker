@@ -2,6 +2,7 @@ from rest_framework import generics
 from rest_framework.permissions import IsAuthenticated
 
 from users.models import User
+from users.permissions import IsUserProfile
 from users.serializers import ForAuthUserSerializers, ForCreateUserSerializers
 from rest_framework_simplejwt.views import TokenObtainPairView
 
@@ -27,7 +28,7 @@ class UsersCreateView(generics.CreateAPIView):
 class UsersUpdateView(generics.UpdateAPIView):
     serializer_class = ForCreateUserSerializers
     queryset = User.objects.all()
-    permission_classes = [IsAuthenticated]
+    permission_classes = [IsUserProfile]
 
     def get_queryset(self):
         user = self.request.user
