@@ -3,6 +3,7 @@ from rest_framework import viewsets, generics
 from rest_framework.permissions import IsAuthenticated
 
 from habit.models import Habit
+from habit.pagination import HabitPagination
 from habit.permissions import UserPermissionsModerator, UserPermissionsOwner
 from habit.serializers import HabitSerializers
 from habit.services import create_habit_schedule
@@ -14,6 +15,7 @@ class HabitViewSet(viewsets.ModelViewSet):
     """Вывод списка всех привычек"""
     serializer_class = HabitSerializers
     queryset = Habit.objects.all()
+    pagination_class = HabitPagination
     # permission_classes = [UserPermissionsModerator,UserPermissionsOwner]
 
     def get_queryset(self):
@@ -34,6 +36,7 @@ class HabitsListView(generics.ListAPIView):
     """Вывод списка  публичных привычек"""
     serializer_class = HabitSerializers
     queryset = Habit.objects.all()
+    pagination_class = HabitPagination
     # permission_classes = [UserPermissionsModerator,UserPermissionsOwner]
 
 
