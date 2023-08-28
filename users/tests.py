@@ -19,7 +19,7 @@ class SetupTestCase(APITestCase):
             '/token/',
             {"email": "test@test.ru",
              "password": "123QWE456RTY",
-             "phone": "+79969190940"
+             "phone": "+79969190940",
         }
         )
 

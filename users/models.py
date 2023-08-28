@@ -4,9 +4,11 @@ from django.contrib.auth.models import UserManager as UserBaseManager
 from django.db import models
 from django.apps import apps
 from django.utils.translation import gettext_lazy as _
+
 # Create your models here.
 
 NULLABLE = {'null': True, 'blank': True}
+
 
 class UserCManager(UserBaseManager):
     """переопределение модели для команды python manage.py createsuperuser (для поля email)"""
@@ -42,9 +44,11 @@ class UserCManager(UserBaseManager):
 
         return self._create_user(email, password, **extra_fields)
 
+
 class UserRoles(models.TextChoices):
     MEMBER = 'member', _('member')
     MODERATOR = 'moderator', _('moderator')
+
 
 class User(AbstractUser):
     """Модель пользователя"""

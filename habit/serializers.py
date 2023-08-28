@@ -3,13 +3,13 @@ from rest_framework import serializers
 from habit.models import Habit
 import datetime
 
+
 class HabitSerializers(serializers.ModelSerializer):
     class Meta:
         model = Habit
         fields = "__all__"
 
-
-    def valedate(self,value):
+    def valedate(self, value):
         """Метод исключает одновременный выбор связанной привычки и указания вознагражденияя"""
         if value.get('associated_habit') and value.get('reward'):
             raise serializers.ValidationError(

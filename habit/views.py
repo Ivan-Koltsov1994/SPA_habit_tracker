@@ -10,12 +10,14 @@ from habit.services import create_habit_schedule
 from users.models import UserRoles
 from habit.tasks import send_telegram_message
 
+
 # Create your views here.
 class HabitViewSet(viewsets.ModelViewSet):
     """Вывод списка всех привычек"""
     serializer_class = HabitSerializers
     queryset = Habit.objects.all()
     pagination_class = HabitPagination
+
     # permission_classes = [UserPermissionsModerator,UserPermissionsOwner]
 
     def get_queryset(self):
@@ -32,13 +34,14 @@ class HabitViewSet(viewsets.ModelViewSet):
         habit = serializer.save()
         create_habit_schedule(habit)
 
+
 class HabitsListView(generics.ListAPIView):
     """Вывод списка  публичных привычек"""
     serializer_class = HabitSerializers
     queryset = Habit.objects.all()
     pagination_class = HabitPagination
-    # permission_classes = [UserPermissionsModerator,UserPermissionsOwner]
 
+    # permission_classes = [UserPermissionsModerator,UserPermissionsOwner]
 
     def get_queryset(self):
         """Фильтруем список привычек только для владельца или модератора"""
