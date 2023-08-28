@@ -102,9 +102,9 @@ WSGI_APPLICATION = 'config.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'coursework7',
-        'USER': 'postgres',
-        'PASSWORD': 'bdfy09111994',
+        "NAME": os.getenv("NAME_POSTGRES_COURSE7"),
+        "USER": os.getenv('USER_POSTGRES'),
+        "PASSWORD": os.getenv('PASSWORD_POSTGRES'),
         'HOST': 'localhost',
         'PORT': '5432',
     }
@@ -215,3 +215,4 @@ CELERY_BEAT_SCHEDULE = {
 
 #Настройки для телеграмм
 TG_BOT_TOKEN = os.getenv("TG_BOT_TOKEN")
+TG_CHAT_ID = os.getenv("TG_CHAT_ID")
