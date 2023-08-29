@@ -49,4 +49,4 @@ class HabitsListView(generics.ListAPIView):
         if user.is_staff or user.is_superuser or user.role == UserRoles.MODERATOR:
             return Habit.objects.all()
         else:
-            return Habit.objects.filter(public=True)
+            return Habit.objects.filter(is_public=True)
