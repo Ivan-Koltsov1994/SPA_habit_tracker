@@ -13,6 +13,7 @@ django.setup()
 
 class HabitsTestCase(APITestCase):
     """Тесты модели Habit"""
+
     def setUp(self) -> None:
         """Подготовка данных перед каждым тестом"""
 
@@ -23,7 +24,7 @@ class HabitsTestCase(APITestCase):
             is_active=True,
             role=UserRoles.MEMBER,
             chat_id=378037756
-                         )
+        )
         self.user.set_password('123QWE456RTY')
         self.user.save()
         response = self.client.post(
@@ -53,26 +54,28 @@ class HabitsTestCase(APITestCase):
         self.assertEqual(habit_test.name, 'habit_for_test')
         self.assertEqual(response.json(), {'id': 2, 'name': 'test2', 'place': 'home', 'time': '17:53:00',
                                            'action': 'pump up the press test', 'is_pleasurable': True, 'periodic': 1,
-                                           'reward': 'prise', 'execution_time': '00:02:00', 'is_public': True, 'owner': 1,
+                                           'reward': 'prise', 'execution_time': '00:02:00', 'is_public': True,
+                                           'owner': 1,
                                            'associated_habit': None})
+
     def test_list_habits(self):
         """Тест списка модели Habit"""
         Habit.objects.create(name=self.test_model_name, place="home", time="17:53",
-                                          action="pump up the press test",
-                                          is_pleasurable=True, periodic=1, reward=None, execution_time="00:02",
-                                          is_public=True, owner=self.user, associated_habit=None)
+                             action="pump up the press test",
+                             is_pleasurable=True, periodic=1, reward=None, execution_time="00:02",
+                             is_public=True, owner=self.user, associated_habit=None)
         response = self.client.get('/app/habits/')
         # print(response.json())
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(Habit.objects.all().count(), 1)
 
     def test_list_habits_public(self):
-            """Тест списка модели Habit публичности"""
-            Habit.objects.create(name=self.test_model_name, place="home", time="17:53",
-                                 action="pump up the press test",
-                                 is_pleasurable=True, periodic=1, reward=None, execution_time="00:02",
-                                 is_public=True, owner=self.user, associated_habit=None)
-            response = self.client.get('/app/public_habits/')
-            # print(response.json())
-            self.assertEqual(response.status_code, status.HTTP_200_OK)
-            self.assertEqual(Habit.objects.all().count(), 1)
+        """Тест списка модели Habit публичности"""
+        Habit.objects.create(name=self.test_model_name, place="home", time="17:53",
+                             action="pump up the press test",
+                             is_pleasurable=True, periodic=1, reward=None, execution_time="00:02",
+                             is_public=True, owner=self.user, associated_habit=None)
+        response = self.client.get('/app/public_habits/')
+        # print(response.json())
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(Habit.objects.all().count(), 1)

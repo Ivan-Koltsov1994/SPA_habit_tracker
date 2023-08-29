@@ -1,15 +1,16 @@
 from users.models import UserRoles
 from rest_framework import permissions
 
-class UserPermissionsModerator(permissions.BasePermission):
 
+class UserPermissionsModerator(permissions.BasePermission):
     message = 'Вы являетесь модератором...'
 
     def has_permission(self, request, view):
         if request.user.is_staff or request.user.role == UserRoles.MODERATOR or request.user.is_superuser:
-            if view.action in ['list',  'retrieve', 'update', 'partial_update', 'destroy','create']:
+            if view.action in ['list', 'retrieve', 'update', 'partial_update', 'destroy', 'create']:
                 return True
         return False
+
 
 class UserPermissionsOwner(permissions.BasePermission):
     message = 'Вы  вляетесь владельцем...'
@@ -20,6 +21,6 @@ class UserPermissionsOwner(permissions.BasePermission):
             return False
 
         if request.user == obj.owner:
-            if view.action in ['list',  'retrieve', 'update', 'partial_update', 'destroy','create']:
+            if view.action in ['list', 'retrieve', 'update', 'partial_update', 'destroy', 'create']:
                 return True
         return False

@@ -1,14 +1,10 @@
-from django.shortcuts import render
 from rest_framework import viewsets, generics
-from rest_framework.permissions import IsAuthenticated
 
 from habit.models import Habit
 from habit.pagination import HabitPagination
-from habit.permissions import UserPermissionsModerator, UserPermissionsOwner
 from habit.serializers import HabitSerializers
 from habit.services import create_habit_schedule
 from users.models import UserRoles
-from habit.tasks import send_telegram_message
 
 
 # Create your views here.
