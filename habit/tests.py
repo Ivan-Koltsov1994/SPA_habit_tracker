@@ -65,3 +65,14 @@ class HabitsTestCase(APITestCase):
         # print(response.json())
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(Habit.objects.all().count(), 1)
+
+    def test_list_habits_public(self):
+            """Тест списка модели Habit публичности"""
+            Habit.objects.create(name=self.test_model_name, place="home", time="17:53",
+                                 action="pump up the press test",
+                                 is_pleasurable=True, periodic=1, reward=None, execution_time="00:02",
+                                 is_public=True, owner=self.user, associated_habit=None)
+            response = self.client.get('/app/public_habits/')
+            # print(response.json())
+            self.assertEqual(response.status_code, status.HTTP_200_OK)
+            self.assertEqual(Habit.objects.all().count(), 1)
